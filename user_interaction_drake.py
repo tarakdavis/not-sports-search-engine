@@ -1,14 +1,20 @@
 import psycopg2
 
+conn = psycopg2.connect("dbname=homework user=taradavis")
+cur = conn.cursor()
+
 
 def search():
-    # get_initial_user_input()
     pass
+    # ['value'] = psycopg2.Binary('%'+ match_string +'%')
+    # cursor.execute("SELECT * FROM some_table WHERE description ILIKE %(value)s;", value)
+    # where Name ILIKE %(name)s", {'name': "%" + value.replace(' ', "%") + "%"})
+
 
 
 def update():
-    #cur.execute("UPDATE homework set #first_name = 'Tara' WHERE id = 2;")
-    # get_initial_user_input()
+    #u = input("But I guess things change, enter the row's ID#: ")
+    #cur.execute("UPDATE homework set %s=%s WHERE id = %s;", (u))
     pass
 
 def add():
@@ -17,17 +23,27 @@ def add():
     duration = input("From Time: ")
     album_name = input("Drop the mix tape that shit sounded like which album: ")
     album_year = input("I'm not even Christian I still went to church what year(YYYY): ")
-    cur.execute("INSERT INTO homework (Artist Name, Song Title, Song Duration, \
-    Album Name, Album Year) VALUES(%s, %s, %s, %s, %s)", (artist_name,
-    song_title, duration, album_name, album_year))
-    get_initial_user_input()
+    cur.execute("INSERT INTO homework (
+                                        """
+                                        Artist Name,
+                                        Song Title,
+                                        Song Duration,
+                                        Album Name,
+                                        Album Year)
+                                        VALUES(%s, %s, %s, %s, %s)",
+                                        (artist_name,
+                                        song_title,
+                                        duration,
+                                        album_name,
+                                        album_year)
+                                        """
+                                        )
 
 
 def display():
     cur.execute("SELECT * FROM homework;")
     results = cur.fetchall()
     print(results)
-    get_initial_user_input()
 
 
 def delete():
@@ -62,8 +78,6 @@ def get_initial_user_input():
 
 
 def main():
-    conn = psycopg2.connect("dbname=homework user=taradavis")
-    cur = conn.cursor()
     print("Welcome to my realest year.")
     get_initial_user_input()
     cur.close()

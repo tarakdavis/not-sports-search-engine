@@ -9,22 +9,24 @@ cur.execute(
     """
     CREATE TABLE IF NOT EXISTS homework (
         id serial PRIMARY KEY,
-        Artist Name varchar(10),
-        Song Title varchar(50),
-        Song Duration varchar(5),
-        Album Name varchar(50),
-        Album Year date,
+        Artist_Name varchar(5),
+        Song_Title varchar(60),
+        Song_Duration varchar(5),
+        Album_Name varchar(60),
+        Album_Year integer
         );
     """
 )
 
 # Artist Name, Song Title, Song Duration, Album Name, Album Year
-with open('drake.csv', 'r') as f:
+with open("drake.csv", 'r') as f:
     reader = csv.reader(f)
     headers = next(reader)
     for row in reader:
-        cur.execute("INSERT INTO homework (Artist Name, Song Title, Song Duration, Album Name, Album Year) VALUES(%s, %s, %s, %s, %s)", (row[0], row[1], row[2], row[3], row[4], row[5]))
-    conn.commit()
-    cur.close()
+        # print(row)
+        cur.execute(("INSERT INTO homework (Artist_Name, Song_Title, Song_Duration, Album_Name, Album_Year) VALUES (%s, %s, %s, %s, %s)", (row[0], row[1], row[2], row[3], row[4]))
+        conn.commit()
 
+
+cur.close()
 conn.close()
