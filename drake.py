@@ -24,7 +24,7 @@ with open("drake.csv", 'r') as f:
     headers = next(reader)
     for row in reader:
         # print(row)
-        cur.execute(("INSERT INTO homework (Artist_Name, Song_Title, Song_Duration, Album_Name, Album_Year) VALUES (%s, %s, %s, %s, %s)", (row[0], row[1], row[2], row[3], row[4]))
+        cur.execute("INSERT INTO homework (Artist_Name, Song_Title, Song_Duration, Album_Name, Album_Year) VALUES (%s, %s, %s, %s, %s)", (row[0], row[1], row[2], row[3], row[4]))
         conn.commit()
 
 
