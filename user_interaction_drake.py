@@ -10,10 +10,10 @@ def search():
     print(cur.fetchone())
     conn.commit()
 
+
 def update():
     display()
     u = input("But I guess things change, enter the row's ID#: ")
-    # cur.execute("SELECT from homework WHERE id=%s;", (u))
     x = input("Provide a new song title: ")
     cur.execute("UPDATE homework set song_title=%s WHERE id=%s", (x, u))
     conn.commit()
@@ -29,10 +29,11 @@ def add():
     cur.execute("INSERT INTO homework (Artist_Name, Song_Title, Song_Duration, Album_Name, Album_Year)VALUES(%s, %s, %s, %s, %s)", (artist_name, song_title, duration, album_name, album_year))
     conn.commit()
 
+
 def display():
     cur.execute("SELECT * FROM homework;")
     results = cur.fetchall()
-    print(*results, sep = '\n')
+    print(*results, sep='\n')
 
 
 def delete():
